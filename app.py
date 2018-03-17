@@ -1,8 +1,9 @@
-from flask import Flask, render_template, redirect, url_for, make_response, request
+from flask import Flask, render_template, redirect, url_for, make_response, request, flash
 import json
 from options import DEFAULTS
 
 app = Flask(__name__)
+app.secret_key = 'dfkf[]dperv@cdhwshdöüó355cdédp&réfrofhwshdö32mlw2'
 
 
 @app.route('/')
@@ -20,6 +21,7 @@ def get_saved_data():
 
 @app.route('/save', methods=['POST'])
 def save_form():
+    flash("Changes saved!")
     data = get_saved_data()
     print(data)
     print(request.form.items())
@@ -29,6 +31,7 @@ def save_form():
     # we need to use this because of the cookies
     # otherwise return redirect would be enough
     response = make_response(redirect(url_for('builder')))
+    # response = make_response(render_template('builder.html', data=get_saved_data(), options=DEFAULTS))
     response.set_cookie('character', json.dumps(data))
     return response
 

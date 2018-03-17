@@ -1,0 +1,5 @@
+.idea/
+/.idea
+venv/
+venv_flask/
+__pycache__/
